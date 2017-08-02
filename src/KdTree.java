@@ -152,6 +152,7 @@ public class KdTree {
     }
 
     private void range(RectHV rect, Node x, List<Point2D> plist) {
+        if (x == null) return;
         if (rect.contains(x.key))
             plist.add(x.key);
         if (x.left != null) {
@@ -165,8 +166,9 @@ public class KdTree {
     }
 
     private Point2D nearest(Point2D p, Node x, Point2D best) {
+        if (x == null) return null;
         if (p.distanceSquaredTo(x.key) < p.distanceSquaredTo(best))
-            best = p;
+            best = x.key;
 //        double shortest = p.distanceSquaredTo(best);
         if (x.D % 2 == 1) {
             if (p.x() < x.key.x()) {
